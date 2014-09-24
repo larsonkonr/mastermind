@@ -11,9 +11,18 @@ class SequenceValidatorTest < Minitest::Test
   end
 
   def test_it_can_determine_correct_number_of_colors
-    skip
     sequence_validator = SequenceValidator.new(["b", "y", "y", "r"],["b", "g", "g", "y"])
     assert_equal 2, sequence_validator.correct_colors
+  end
+
+  def test_it_can_determine_correct_number_of_colors_too
+    sequence_validator = SequenceValidator.new(["b", "y", "g", "r"],["b", "g", "g", "y"])
+    assert_equal 3, sequence_validator.correct_colors
+  end
+
+  def test_it_can_determine_correct_number_of_colors_also
+    sequence_validator = SequenceValidator.new(["b", "y", "y", "r"],["b", "g", "r", "y"])
+    assert_equal 3, sequence_validator.correct_colors
   end
 
 end

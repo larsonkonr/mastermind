@@ -1,7 +1,7 @@
 class Game
   attr_reader :guess,
               :turns,
-              :sequence,
+              :correct_sequence,
               :printer,
               :command,
               :sequence_validator
@@ -10,40 +10,38 @@ class Game
     @turns              = 1
     @printer            = printer
     @command            = ""
-    @sequence           = SequenceGenerator.sequence
-    @sequence_validator = SequenceValidator.new
+    @correct_sequence   = SequenceGenerator.sequence
+    @sequence_validator = SequenceValidator.new(guess, correct_sequence)
   end
 
   def play
-    p "Here is the sequence: #{sequence}"
+    p "Here is the sequence: #{correct_sequence}"
     printer.game_intro
     until win? || exit?
       printer.turn(turns)
       printer.command_request
       @command = gets.strip
-      # @guess = command
       process_game_turn
     end
   end
 
   def process_game_turn
-    add_turn
-    @guess = command.split("")
-    sequence_validator.guess = guess
-    sequence_validator.sequence = sequence
-    correct_colors    = sequence_validator.correct_colors
-    correct_positions = sequence_validator.correct_positions
     case
-    when exit?
-      printer.quit
-    # when not_a_proper_guess?
-    #   printer.not_a_proper_guess
-    when win?
-      printer.win
+    when instructions?
+      printer.instruction
     else
-      puts "Correct positions: #{correct_positions}"
-    # when invalid_command
-    #   printer.invalid_command
+      add_turn
+      @guess = command.split("")
+      sequence_validator = SequenceValidator.new(@guess, correct_sequence)
+      correct_colors    = sequence_validator.correct_colors
+      correct_positions = sequence_validator.correct_positions
+      case
+      when win?
+        printer.win
+      else
+        puts "Correct positions: #{correct_positions}"
+        puts "Correct colors: #{correct_colors}"
+      end
     end
   end
 
@@ -52,15 +50,14 @@ class Game
   end
 
   def win?
-    command.split("") == sequence
+    command.split("") == correct_sequence
   end
 
   def exit?
     command == "q" || command == "quit"
   end
 
-  # def not_a_proper_guess?
-  #   command != "q" || "i" || "p" || "quit"
-  #   printer.not_a_proper_guess
-  # end
+  def instructions?
+    command == "i"
+  end
 end
