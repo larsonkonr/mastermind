@@ -55,4 +55,12 @@ class Printer
     puts '  \/                            \/          \/  '
     instruction
   end
+
+  def lose
+    puts 'Im sorry you have lost'
+  end
+
+  def invalid_command
+    puts 'You have entered an invalid command please try again'
+  end
 end

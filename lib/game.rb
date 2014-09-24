@@ -17,11 +17,14 @@ class Game
   def play
     p "Here is the sequence: #{correct_sequence}"
     printer.game_intro
-    until win? || exit?
+    until win? || exit? #|| lost?
       printer.turn(turns)
       printer.command_request
-      @command = gets.strip
-      process_game_turn
+      @command = gets.strip.downcase
+      # if @command.invalid_command?
+        # else
+          process_game_turn
+        # end
     end
   end
 
@@ -35,12 +38,11 @@ class Game
       sequence_validator = SequenceValidator.new(@guess, correct_sequence)
       correct_colors    = sequence_validator.correct_colors
       correct_positions = sequence_validator.correct_positions
+      puts "Correct positions: #{correct_positions}"
+      puts "Correct colors: #{correct_colors}"
       case
       when win?
         printer.win
-      else
-        puts "Correct positions: #{correct_positions}"
-        puts "Correct colors: #{correct_colors}"
       end
     end
   end
@@ -57,7 +59,18 @@ class Game
     command == "q" || command == "quit"
   end
 
+  def lost?
+    @turns == 10
+    #command = "q"
+  end
+
   def instructions?
     command == "i"
+  end
+
+  def invalid_command?
+    if command != "q" || "i" || "p"
+      printer.invalid_command
+    end
   end
 end
