@@ -37,10 +37,4 @@ class CLI
   def finished?
     command == "q" || command == "quit"
   end
-
-  # def invalid_command?
-  #   if command != "q" || "i" || "p"
-  #     printer.invalid_command
-  #   end
-  # end
 end

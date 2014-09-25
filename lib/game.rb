@@ -21,12 +21,9 @@ class Game
       add_turn
       printer.command_request
       @command = gets.strip.downcase
-#      add_turn
       if invalid_command?
         printer.invalid_command
-        # process_game_turn
       else
-#        add_turn
         process_game_turn
       end
     end
@@ -34,12 +31,8 @@ class Game
 
   def process_game_turn
     case
-#    when instructions?
-#      printer.instruction
     when ending?
-
     else
-#      add_turn
       @guess = command.split("")
       if invalid_guess
       else
@@ -48,8 +41,6 @@ class Game
       correct_positions  = sequence_validator.correct_positions
       puts "Correct positions: #{correct_positions}"
       puts "Correct colors: #{correct_colors}"
-#      add_turn
-
       case
       when win?
         puts "\n"
@@ -96,14 +87,6 @@ class Game
       printer.invalid_guess_too_many
     end
   end
-
-  # def command_too_small?
-  #
-  # end
-  #
-  # def command_too_large?
-  #   command.lenght > 4
-  # end
 
   def invalid_guess
     count = @guess.join.scan(/[^rgby]/).count
