@@ -17,7 +17,7 @@ class CLI
         process_initial_commands
       # end
     end
-    printer.exit
+    printer.ending
   end
 
   def process_initial_commands

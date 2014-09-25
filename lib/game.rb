@@ -17,7 +17,7 @@ class Game
   def play
     p "Here is the sequence: #{correct_sequence}"
     printer.game_intro
-    until win? || exit? || lost?
+    until win? || ending? || lost?
       add_turn
       printer.command_request
       @command = gets.strip.downcase
@@ -32,7 +32,7 @@ class Game
     case
     when instructions?
       printer.instruction
-    when exit?
+    when ending?
 
     else
       @guess = command.split("")
@@ -61,7 +61,7 @@ class Game
     command.split("") == correct_sequence
   end
 
-  def exit?
+  def ending?
     command == "q" || command == "quit"
   end
 

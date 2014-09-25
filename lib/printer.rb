@@ -27,7 +27,7 @@ class Printer
     puts "The codebreaker tries to guess the pattern, in both order and color, within ten turns. \nEach guess is made by placing a guess of code colors on the decoding board. Once placed, \the computer provides feedback with how many are correct colors and how many are in the right location"
   end
 
-  def exit
+  def ending
     puts "Good bye."
   end
 
