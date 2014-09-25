@@ -32,8 +32,9 @@ class Printer
   end
 
   def game_intro
+    puts "\n"
     puts "Game initialized."
-    instruction
+    color_instructions
   end
 
   def turn(turns)
@@ -42,6 +43,7 @@ class Printer
   end
 
   def command_request
+    puts "\n"
     print "Enter your guess: "
   end
 
@@ -73,6 +75,11 @@ class Printer
   end
 
   def invalid_command
+    puts "\n"
     puts 'You have entered an invalid command please try again'
+  end
+
+  def color_instructions
+    puts "Combine 'r' 'g' 'b' 'y' to make a 4 color code"
   end
 end

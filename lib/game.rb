@@ -32,6 +32,8 @@ class Game
     case
     when instructions?
       printer.instruction
+    when exit?
+
     else
       @guess = command.split("")
       sequence_validator = SequenceValidator.new(@guess, correct_sequence)
@@ -53,7 +55,6 @@ class Game
   def add_turn
     @turns += 1
     printer.turn(turns)
-    puts "\n"
   end
 
   def win?
@@ -72,9 +73,4 @@ class Game
     command == "i"
   end
 
-  def invalid_command?
-    if command != "q" || "i" || "p"
-      printer.invalid_command
-    end
-  end
 end

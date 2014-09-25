@@ -11,7 +11,11 @@ class CLI
     until finished?
       printer.command
       @command = gets.strip
-      process_initial_commands
+      # if @command.invalid_command?
+      #   printer.invalid_command
+      # else
+        process_initial_commands
+      # end
     end
     printer.exit
   end
@@ -37,4 +41,10 @@ class CLI
   def finished?
     command == "q" || command == "quit"
   end
+
+  # def invalid_command?
+  #   if command != "q" || "i" || "p"
+  #     printer.invalid_command
+  #   end
+  # end
 end
