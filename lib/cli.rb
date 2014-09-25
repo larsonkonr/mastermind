@@ -11,11 +11,7 @@ class CLI
     until finished?
       printer.command
       @command = gets.strip
-      # if @command.invalid_command?
-      #   printer.invalid_command
-      # else
         process_initial_commands
-      # end
     end
     printer.ending
   end

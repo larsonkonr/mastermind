@@ -44,6 +44,7 @@ class SequenceValidator
       element == sequence[index_num]
     end
   end
+  
 
 
 end

@@ -1,5 +1,5 @@
 class Game
-  attr_reader :guess,
+  attr_accessor :guess,
               :turns,
               :correct_sequence,
               :printer,
@@ -21,26 +21,35 @@ class Game
       add_turn
       printer.command_request
       @command = gets.strip.downcase
-      # if @command.invalid_command?
-        # else
-          process_game_turn
-        # end
+#      add_turn
+      if invalid_command?
+        printer.invalid_command
+        # process_game_turn
+      else
+#        add_turn
+        process_game_turn
+      end
     end
   end
 
   def process_game_turn
     case
-    when instructions?
-      printer.instruction
+#    when instructions?
+#      printer.instruction
     when ending?
 
     else
+#      add_turn
       @guess = command.split("")
+      if invalid_guess
+      else
       sequence_validator = SequenceValidator.new(@guess, correct_sequence)
-      correct_colors    = sequence_validator.correct_colors
-      correct_positions = sequence_validator.correct_positions
+      correct_colors     = sequence_validator.correct_colors
+      correct_positions  = sequence_validator.correct_positions
       puts "Correct positions: #{correct_positions}"
       puts "Correct colors: #{correct_colors}"
+#      add_turn
+
       case
       when win?
         puts "\n"
@@ -49,6 +58,7 @@ class Game
       when lost?
         printer.lose
       end
+    end
     end
   end
 
@@ -73,4 +83,33 @@ class Game
     command == "i"
   end
 
+  def valid_command?
+    command.length == 4 || command == 'q'
+  end
+
+  def invalid_command?
+    !valid_command?
+    if command.length < 4 && command != "q"
+      printer.invalid_guess_not_enough
+    end
+    if command.length > 4
+      printer.invalid_guess_too_many
+    end
+  end
+
+  # def command_too_small?
+  #
+  # end
+  #
+  # def command_too_large?
+  #   command.lenght > 4
+  # end
+
+  def invalid_guess
+    count = @guess.join.scan(/[^rgby]/).count
+    if count > 1
+    printer.invalid_guess
+    @turns -= 1
+    end
+  end
 end

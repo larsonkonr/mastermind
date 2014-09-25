@@ -25,29 +25,12 @@ class Timer
     return !@running
   end
 
-  # def timer
-  #   start_time = Time.now
-  #   stop_time = Time.now
-  #   seconds_taken = stop_time - start_time
-  # end
-
   def start
     @running = true
     @start_time = Time.now
 
     limit if @time_limit
 
-    self
-
-    ##if block_given? then
-    ##  begin
-    ##    yield( self )
-    ##  ensure
-    ##    stop
-    ##  end
-    ##else
-    ##  @time_limit
-    ##end
   end
 
   def stop
