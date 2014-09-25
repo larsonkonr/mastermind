@@ -43,6 +43,8 @@ class Game
       when win?
         puts "Congratulations! You guessed the sequence #{correct_sequence} in #{turns} guess"
         printer.win
+      when lost?
+        printer.lose
       end
     end
   end
@@ -62,9 +64,7 @@ class Game
   end
 
   def lost?
-    if @turns == 10
-      printer.lose
-    end
+    @turns == 10
   end
 
   def instructions?
