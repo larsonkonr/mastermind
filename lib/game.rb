@@ -107,7 +107,7 @@ class Game
 
   def invalid_guess
     count = @guess.join.scan(/[^rgby]/).count
-    if count > 1
+    if count != 0
     printer.invalid_guess
     @turns -= 1
     end
