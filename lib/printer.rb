@@ -16,10 +16,10 @@ class Printer
 
   def instruction
     puts "Enter 'p' to play, 'i' for instructions, or 'q' to quit."
-    puts "\n"
   end
 
   def command
+    puts "\n"
     print "Enter your command: "
   end
 
@@ -37,8 +37,8 @@ class Printer
   end
 
   def turn(turns)
-    puts "This is turn #{turns} of 10."
     puts "\n"
+    puts "This is turn #{turns} of 10."
   end
 
   def command_request
@@ -51,23 +51,24 @@ class Printer
   end
 
   def win
-    puts ' _____.___.               __      __.__         '
-    puts ' \__  |   | ____  __ __  /  \    /  \__| ____   '
-    puts '  /   |   |/  _ \|  |  \ \   \/\/   /  |/    \  '
-    puts '  \____   (  <_> )  |  /  \        /|  |   |  \ '
-    puts '  / ______|\____/|____/    \__/\  / |__|___|  / '
-    puts '  \/                            \/          \/  '
+    puts '                    _____.___.               __      __.__         '
+    puts '                    \__  |   | ____  __ __  /  \    /  \__| ____   '
+    puts '                     /   |   |/  _ \|  |  \ \   \/\/   /  |/    \  '
+    puts '                     \____   (  <_> )  |  /  \        /|  |   |  \ '
+    puts '                     / ______|\____/|____/    \__/\  / |__|___|  / '
+    puts '                     \/                            \/          \/  '
     instruction
   end
 
   def lose
-    puts'    .____                                '
-    puts'    |    |    ____  ______ ___________   '
-    puts'    |    |   /  _ \/  ___// __ \_  __ \  '
-    puts'    |    |__(  <_> )___ \\  ___/|  | \/  '
-    puts'    |_______ \____/____  >\___  >__|     '
-    puts'            \/         \/     \/         '
+    puts'                    .____                   __    '
+    puts'                    |    |    ____  _______/  |_  '
+    puts'                    |    |   /  _ \/  ___/\   __\ '
+    puts'                    |    |__(  <_> )___ \  |  |   '
+    puts'                    |_______ \____/____  > |__|   '
+    puts'                            \/         \/         '
     puts 'Im sorry you have lost would you like to try again'
+    puts "\n"
     instruction
   end
 

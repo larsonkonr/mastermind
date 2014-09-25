@@ -18,6 +18,7 @@ class Game
     p "Here is the sequence: #{correct_sequence}"
     printer.game_intro
     until win? || exit? || lost?
+      add_turn
       printer.command_request
       @command = gets.strip.downcase
       # if @command.invalid_command?
@@ -38,9 +39,9 @@ class Game
       correct_positions = sequence_validator.correct_positions
       puts "Correct positions: #{correct_positions}"
       puts "Correct colors: #{correct_colors}"
-      add_turn
       case
       when win?
+        puts "\n"
         puts "Congratulations! You guessed the sequence #{correct_sequence} in #{turns} guess"
         printer.win
       when lost?
