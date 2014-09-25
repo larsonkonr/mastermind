@@ -7,7 +7,7 @@ class Game
               :sequence_validator
 
   def initialize(printer = Printer.new)
-    @turns              = 1
+    @turns              = 0
     @printer            = printer
     @command            = ""
     @correct_sequence   = SequenceGenerator.sequence
@@ -17,8 +17,7 @@ class Game
   def play
     p "Here is the sequence: #{correct_sequence}"
     printer.game_intro
-    until win? || exit? #|| lost?
-      printer.turn(turns)
+    until win? || exit? || lost?
       printer.command_request
       @command = gets.strip.downcase
       # if @command.invalid_command?
@@ -33,15 +32,16 @@ class Game
     when instructions?
       printer.instruction
     else
-      add_turn
       @guess = command.split("")
       sequence_validator = SequenceValidator.new(@guess, correct_sequence)
       correct_colors    = sequence_validator.correct_colors
       correct_positions = sequence_validator.correct_positions
       puts "Correct positions: #{correct_positions}"
       puts "Correct colors: #{correct_colors}"
+      add_turn
       case
       when win?
+        puts "Congratulations! You guessed the sequence #{correct_sequence} in #{turns} guess"
         printer.win
       end
     end
@@ -49,6 +49,8 @@ class Game
 
   def add_turn
     @turns += 1
+    printer.turn(turns)
+    puts "\n"
   end
 
   def win?
@@ -60,8 +62,9 @@ class Game
   end
 
   def lost?
-    @turns == 10
-    #command = "q"
+    if @turns == 10
+      printer.lose
+    end
   end
 
   def instructions?

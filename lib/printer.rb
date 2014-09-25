@@ -1,5 +1,6 @@
 class Printer
   def welcome
+    print "\e[2J\e[f"
     puts"\n"
     puts'                                           Welcome to                                            '
     puts'    _____     _____    ______________________________________   _____  .___ _______  ________    '
@@ -9,11 +10,13 @@ class Printer
     puts' \____|__  \____|__  /_______  / |____|  /_______  /|____|_  \____|__  |___\____|__  /_______  / '
     puts'         \/        \/        \/                  \/        \/        \/            \/        \/  '
     puts'                             And may the odds be ever in your favor.'
+    puts "\n"
     instruction
   end
 
   def instruction
     puts "Enter 'p' to play, 'i' for instructions, or 'q' to quit."
+    puts "\n"
   end
 
   def command
@@ -21,7 +24,7 @@ class Printer
   end
 
   def game_instructions
-    puts "The codebreaker tries to guess the pattern, in both order and color, within ten turns. Each guess is made by placing a guess of code colors on the decoding board. Once placed, the computer provides feedback with how many are correct colors and how many are in the right location"
+    puts "The codebreaker tries to guess the pattern, in both order and color, within ten turns. \nEach guess is made by placing a guess of code colors on the decoding board. Once placed, \the computer provides feedback with how many are correct colors and how many are in the right location"
   end
 
   def exit
@@ -30,11 +33,12 @@ class Printer
 
   def game_intro
     puts "Game initialized."
-    puts "Guess 'r' red 'b' blue 'g' green 'y' yellow or 'q' at anytime to quit"
+    instruction
   end
 
   def turn(turns)
     puts "This is turn #{turns} of 10."
+    puts "\n"
   end
 
   def command_request
@@ -57,7 +61,14 @@ class Printer
   end
 
   def lose
-    puts 'Im sorry you have lost'
+    puts'    .____                                '
+    puts'    |    |    ____  ______ ___________   '
+    puts'    |    |   /  _ \/  ___// __ \_  __ \  '
+    puts'    |    |__(  <_> )___ \\  ___/|  | \/  '
+    puts'    |_______ \____/____  >\___  >__|     '
+    puts'            \/         \/     \/         '
+    puts 'Im sorry you have lost would you like to try again'
+    instruction
   end
 
   def invalid_command
